@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Recepcionista - Barbería</title>
+    <link rel="stylesheet" href="styles-formularios.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="contenedor-formulario">
+        <h2>Registrar Recepcionista</h2>
+
+        <form action="registrarRecepcionista.html" method="post">
+
+            <label for="nombre">Nombres:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" id="apellidos" name="apellidos" required>
+
+            <label for="Telefono">Teléfono:</label>
+            <input type="text" id="Telefono" name="Telefono" required>
+
+            <label for="Turno">Turno:</label>
+            <select id="Turno" name="Turno" required>
+                <option value="" disabled selected>Selecciona un turno...</option>
+                <option value="matutino">Matutino</option>
+                <option value="vespertino">Vespertino</option>
+            </select>
+
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" required>
+
+            <div class="contenedor-formulario-botones">
+                <button class="boton-registrar" type="submit">Registrar</button>
+            </div>
+
+            <a href="seleccionRegistro.html">
+                <button class="contenedor-formulario-salir" type="button">Volver a la página de selección</button>
+            </a>
+
+        </form>
+    </div>
+</body>
+
+</html>

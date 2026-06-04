@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Configuración para aceptar caracteres especiales como acentos y eñes -->
+    <meta charset="UTF-8">
+    <!-- Configuración para que el formulario se adapte correctamente a celulares y tablets -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Título que aparecerá en la pestaña del navegador -->
+    <title>Iniciar Sesión</title>
+    <!-- Vinculación con tu archivo de estilos específico para formularios -->
+    <link rel="stylesheet" href="styles-formularios.css">
+</head>
+
+<body>
+
+    <!-- 📦 CONTENEDOR PRINCIPAL: Centra y agrupa visualmente la tarjeta del formulario -->
+    <div class="contenedor-formulario">
+
+        <!-- Título principal dentro de la tarjeta -->
+        <h2>Iniciar Sesión</h2>
+
+        <!-- 📝 INICIO DEL FORMULARIO 
+             action: Define a dónde se enviarán los datos (actualmente apunta a sí mismo).
+             method="post": Envía la información de forma oculta y segura (ideal para contraseñas). -->
+        <form action="login.html" method="post">
+
+            <!-- Campo 1: Nombres -->
+            <!-- El 'for' del label debe coincidir con el 'id' del input para que al hacer clic en el texto se active el cuadro de escritura -->
+            <label for="nombres">Nombres:</label>
+            <!-- required: Obliga al usuario a rellenar el campo antes de poder enviar el formulario -->
+            <input type="text" id="nombres" name="nombres" required>
+
+            <!-- Campo 2: Apellidos -->
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" id="apellidos" name="apellidos" required>
+
+            <!-- Campo 3: Contraseña -->
+            <label for="password">Contraseña:</label>
+            <!-- type="password": Oculta los caracteres transformándolos en puntos negros por seguridad -->
+            <input type="password" id="password" name="password" required>
+
+            <!-- 🟢 BOTÓN DE ENVÍO 
+                 type="submit": Ejecuta la acción del formulario y envía los datos recolectados -->
+            <button class="contenedor-formulario-ingresar" type="submit">Iniciar Sesión</button>
+
+        </form> <!-- El cierre del formulario debe ir aquí para procesar correctamente los campos anteriores -->
+
+        <!-- 🔴 BOTÓN DE SALIDA 
+             Se encuentra fuera del <form> para que actúe simplemente como un enlace de navegación -->
+        <a href="paginaPrincipal.html">
+            <!-- type="button": Le avisa al navegador que es un botón genérico y no intentará validar ni enviar los campos de texto -->
+            <button class="contenedor-formulario-salir" type="button">Volver a la página de inicio</button>
+        </a>
+
+    </div> <!-- Cierre de la caja .contenedor-formulario -->
+
+</body>
+
+</html>

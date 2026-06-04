@@ -1,0 +1,200 @@
+/* =========================================
+   RESETEO GLOBAL
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================================
+   ESTRUCTURA GENERAL DEL SISTEMA (SPA)
+   ========================================= */
+body {
+    background-color: #fbfbfc;
+    /* Fondo gris súper claro para la zona de trabajo */
+    overflow: hidden;
+    /* ¡CLAVE! Corta el scroll general de toda la página para comportarse como una App de escritorio */
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    /* Fija la altura al tamaño exacto del monitor */
+    display: flex;
+    flex-direction: column;
+    /* Apila el contenido en columna: Arriba (Barra Roja) y Abajo (Paneles) */
+}
+
+/* =========================================
+   ENCABEZADO (Barra Superior Roja)
+   ========================================= */
+.barra-sup {
+    background-color: #C41E3A;
+    /* Rojo Barbería */
+    width: 100%;
+    /* De lado a lado */
+    height: 15vh;
+    /* Ocupa el 15% de la altura total de la pantalla */
+    display: flex;
+    align-items: center;
+    /* Centra el título y botón verticalmente */
+    padding-left: 20px;
+    /* Despega el texto del borde izquierdo */
+}
+
+/* =========================================
+   CONTENEDORES PRINCIPALES DE TRABAJO
+   ========================================= */
+/* Caja que divide el menú lateral y la zona blanca */
+.contenedor-principal {
+    display: grid;
+    /* Usa la tecnología Grid para dividir el espacio en columnas exactas */
+    grid-template-columns: 100px 1fr;
+    /* Columna 1 (Menú): 100px fijos. Columna 2 (Trabajo): 1fr (todo el resto del espacio sobrante) */
+    flex-grow: 1;
+    /* Le dice a este contenedor que se estire para llenar todo el espacio vertical bajo la barra roja */
+    width: 100%;
+}
+
+/* =========================================
+   MENÚ LATERAL IZQUIERDO (Barra Azul)
+   ========================================= */
+.barra-izq {
+    background-color: #1A3A52;
+    /* Azul oscuro corporativo */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* Apila los botones de arriba hacia abajo */
+    align-items: center;
+    /* Centra los botones horizontalmente en la franja de 100px */
+    padding-top: 15px;
+    padding-bottom: 15px;
+    gap: 10px;
+    /* Crea un espacio uniforme de 10px entre cada botón */
+    overflow-y: auto;
+    /* ¡MUY IMPORTANTE! Si hay muchos botones, solo esta barra azul tendrá scroll (como lo ajustamos antes) */
+}
+
+/* Botones individuales del menú lateral */
+.boton-barra-izq {
+    background: none;
+    /* Transparentes por defecto para que se vea el azul de fondo */
+    border: none;
+    padding: 10px 5px;
+    width: 90%;
+    /* Ocupan casi todo el ancho de los 100px */
+    border-radius: 8px;
+    /* Esquinas redondeadas */
+    display: flex;
+    flex-direction: column;
+    /* Apila el icono arriba y el texto abajo */
+    align-items: center;
+    gap: 6px;
+    /* Separación entre el icono y la palabra */
+    transition: background-color 0.3s;
+    /* Suaviza el cambio de color al pasar el mouse */
+}
+
+/* Efecto al pasar el mouse por los botones laterales */
+.boton-barra-izq:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    /* Crea un "resaltado" blanco semitransparente sobre el botón */
+}
+
+/* Textos dentro del botón lateral */
+.texto-barra-izq {
+    color: #ffffff;
+    font-size: 11px;
+    /* Letra pequeña para que quepa bien */
+    font-weight: bold;
+    text-transform: uppercase;
+    /* Convierte todo el texto a MAYÚSCULAS automáticamente */
+}
+
+/* Iconos de FontAwesome dentro del botón */
+.icono-barra-izq {
+    font-size: 26px;
+    /* Tamaño grande para que sean el foco visual */
+    color: #ffffff;
+    display: inline-block;
+}
+
+/* =========================================
+   BOTONES DEL ENCABEZADO Y TEXTOS
+   ========================================= */
+/* Botón superior derecho (Iniciar o Cerrar Sesión) */
+.boton-iniciar-sesion {
+    font-size: 24px;
+    color: #ffffff;
+    /* Texto blanco para contrastar con el fondo rojo de la barra-sup */
+    margin-left: auto;
+    /* Truco de flexbox: lo empuja automáticamente hacia el extremo derecho */
+    margin-right: 20px;
+    /* Lo separa un poco del borde derecho de la pantalla */
+    border: #1A3A52 solid 4px;
+    /* Borde azul oscuro grueso */
+    background: none;
+    /* Fondo transparente */
+    transition: background-color 0.3s;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    /* Quita el subrayado del hipervínculo */
+    display: inline-block;
+}
+
+.boton-iniciar-sesion:hover {
+    background-color: rgba(0, 255, 64, 0.751);
+    /* Cambia a verde al pasar el cursor */
+}
+
+/* =========================================
+   ÁREA CENTRAL DE TRABAJO (Paneles Dinámicos)
+   ========================================= */
+.contenedor-secundario {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* Empieza a colocar el contenido desde arriba */
+    align-items: center;
+    /* Centra el contenido (como las tablas o formularios) */
+    padding-top: 20px;
+    overflow-y: auto;
+    /* ¡MUY IMPORTANTE! Si el contenido de la pantalla es muy largo, permite hacer scroll solo en esta zona blanca */
+    height: 100%;
+}
+
+/* Estilos para los títulos que se inyectan en cada panel */
+.titulo-principal,
+.titulo-secundario {
+    color: #0c0c0c;
+    /* Casi negro */
+    text-align: center;
+    margin-bottom: 10px;
+    margin-left: 0px;
+    padding-top: 0px;
+}
+
+/* Título de la barra superior (Ej. "Administrador") */
+.titulo-barra-sup {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+/* Iconos sueltos al lado de títulos */
+.iconos-titulo {
+    font-size: 26px;
+    color: #ffffff;
+    display: inline-flexbox;
+    /* Propiedad antigua, se recomienda usar 'inline-flex' o 'inline-block' */
+}
+
+/* El bloque contenedor que JavaScript enciende o apaga (Citas, Ventas, etc.) */
+.seccion-dinamica {
+    width: 100%;
+    padding: 20px;
+    /* Dale aire al contenido para que no toque los bordes */
+}

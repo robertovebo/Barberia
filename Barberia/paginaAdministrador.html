@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina Administración</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="barra-sup">
+        <h1 class="titulo-barra-sup">Administrador</h1>
+        <a href="paginaPrincipal.html" class="boton-iniciar-sesion">Cerrar Sesión</a>
+    </div>
+
+    <div class="contenedor-principal">
+
+        <div class="barra-izq">
+
+            <button class="boton-barra-izq" onclick="mostrarSeccion('citas')">
+                <i class="fa-regular fa-calendar-days icono-barra-izq"></i>
+                <span class="texto-barra-izq">Citas</span>
+            </button>
+
+            <button class="boton-barra-izq" onclick="mostrarSeccion('ventas')">
+                <i class="fa-solid fa-cash-register icono-barra-izq"></i>
+                <span class="texto-barra-izq">Ventas</span>
+            </button>
+
+            <button class="boton-barra-izq" onclick="mostrarSeccion('servicios')">
+                <i class="fa-solid fa-scissors icono-barra-izq"></i>
+                <span class="texto-barra-izq">Servicios</span>
+            </button>
+
+            <button class="boton-barra-izq" onclick="mostrarSeccion('clientes')">
+                <i class="fa-solid fa-users icono-barra-izq"></i>
+                <span class="texto-barra-izq">Clientes</span>
+            </button>
+
+            <button class="boton-barra-izq" onclick="mostrarSeccion('personal')">
+                <i class="fa-solid fa-user-tie icono-barra-izq"></i>
+                <span class="texto-barra-izq">Personal</span>
+            </button>
+
+            <button class="boton-barra-izq" onclick="mostrarSeccion('inventario')">
+                <i class="fa-solid fa-warehouse icono-barra-izq"></i>
+                <span class="texto-barra-izq">Inventario</span>
+            </button>
+
+            <button class="boton-barra-izq" onclick="mostrarSeccion('dashboard')">
+                <i class="fa-solid fa-chart-pie icono-barra-izq"></i>
+                <span class="texto-barra-izq">Dashboard</span>
+            </button>
+        </div>
+
+        <div class="contenedor-secundario">
+
+            <div id="citas" class="seccion-dinamica">
+                <h1 class="titulo-principal">Control Global de Citas</h1>
+                <h5 style="margin-top: 15px;">Registra citas, consultar, cancelar, editar</h5>
+            </div>
+
+            <div id="ventas" class="seccion-dinamica" style="display: none;">
+                <h1 class="titulo-principal">Reportes de Ventas e Ingresos</h1>
+                <h5 style="margin-top: 15px;">consultar ventas, cancelar ventas</h5>
+            </div>
+
+            <div id="servicios" class="seccion-dinamica" style="display: none;">
+                <h1 class="titulo-principal">Configuración de Servicios y Precios</h1>
+                <h5 style="margin-top: 15px;"> agregar servicios/cortes, consultar servicios, editar servicios/corte,
+                    eliminar servicios/corte</h5>
+            </div>
+
+            <div id="clientes" class="seccion-dinamica" style="display: none;">
+                <h1 class="titulo-principal">Control de Clientes</h1>
+                <h5 style="margin-top: 15px;">Registrar nuevos clientes, consultar clientes, editar, eliminar, dar de
+                    baja a clientes.</h5>
+            </div>
+
+            <div id="personal" class="seccion-dinamica" style="display: none;">
+                <h1 class="titulo-principal">Administración de Personal</h1>
+                <h5 style="margin-top: 15px;">Alta y baja de barberos,recepcionistas,administradores, consultar
+                    barberos,recepcionistas,administradores, asignar, editar y consultar turnos</h5>
+            </div>
+
+            <div id="inventario" class="seccion-dinamica" style="display: none;">
+                <h1 class="titulo-principal">Inventario</h1>
+                <h5 style="margin-top: 15px;">Gestión de stock, eliminar, consultar todo, buscar epecificamente,
+                    actualizar stock</h5>
+            </div>
+
+            <div id="dashboard" class="seccion-dinamica" style="display: none;">
+                <h1 class="titulo-principal">Dashboard Administrativo</h1>
+                <h5 style="margin-top: 15px;">Gráficas de rendimiento general del negocio</h5>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        function mostrarSeccion(idSeccion) {
+            // 1. Localiza y extrae un listado con todas las pantallas configuradas bajo la misma clase
+            let secciones = document.querySelectorAll('.seccion-dinamica');
+
+            // 2. Itera sobre cada pantalla de la lista ocultándolas de la vista del usuario
+            secciones.forEach(function (seccion) {
+                seccion.style.display = 'none';
+            });
+
+            // 3. Selecciona el contenedor coincidente con el ID recibido del botón y activa su visualización
+            document.getElementById(idSeccion).style.display = 'block';
+        }
+    </script>
+
+</body>
+
+</html>
