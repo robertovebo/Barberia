@@ -1,0 +1,220 @@
+/* =========================================
+   RESETEO GLOBAL
+   ========================================= */
+* {
+    margin: 0;
+    /* Quita los márgenes automáticos del navegador */
+    padding: 0;
+    /* Quita los espacios internos automáticos */
+    box-sizing: border-box;
+    /* Asegura que los bordes y paddings no aumenten el tamaño total de las cajas */
+}
+
+/* =========================================
+   CUERPO DE LA PÁGINA (Fondos y centrado)
+   ========================================= */
+body {
+    font-family: Arial, sans-serif;
+    /* Tipografía limpia y moderna */
+    height: 100vh;
+    /* Ocupa el 100% de la altura de la pantalla visible */
+    background-image: url('imag/fondo_login.jpeg');
+    /* Imagen de fondo de la barbería */
+    background-size: cover;
+    /* Ajusta la imagen para cubrir toda la pantalla sin deformarse */
+    background-position: center;
+    /* Centra la imagen de fondo */
+    background-repeat: no-repeat;
+    /* Evita que la imagen se repita como mosaico */
+    background-attachment: fixed;
+    /* Hace que el fondo se quede quieto aunque hagas scroll */
+
+    /* Flexbox para centrar la tarjeta del formulario justo en el medio de la pantalla */
+    display: flex;
+    justify-content: center;
+    /* Centrado horizontal */
+    align-items: center;
+    /* Centrado vertical */
+}
+
+/* =========================================
+   TARJETA BLANCA DEL FORMULARIO
+   ========================================= */
+.contenedor-formulario {
+    border: 5px solid #C41E3A;
+    /* Borde rojo característico de tu diseño */
+    background-color: rgba(255, 255, 255, 0.95);
+    /* Fondo blanco con un 5% de transparencia para dejar ver un poco el fondo */
+    padding: 10px;
+    /* Espacio interno entre el borde y el contenido */
+    border-radius: 12px;
+    /* Esquinas redondeadas suaves */
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.3);
+    /* Sombra difuminada para dar efecto de relieve/flotación */
+    width: 100%;
+    /* Ocupa el ancho disponible... */
+    max-width: 650px;
+    /* ...pero nunca será más ancha de 400px (ideal para móviles y PC) */
+    text-align: center;
+    /* Centra los títulos y botones internos */
+}
+
+/* =========================================
+   DISEÑO DE FORMULARIO A DOS COLUMNAS (3 y 3)
+   ========================================= */
+.contenedor-columnas {
+    display: flex;
+    gap: 20px;
+    /* Espacio de separación entre la columna izquierda y la derecha */
+    width: 100%;
+}
+
+.columna-mitad {
+    flex: 1;
+    /* Obliga a ambas columnas a medir exactamente el 50% */
+    display: flex;
+    flex-direction: column;
+    /* Apila los inputs uno debajo de otro */
+}
+
+/* Título dentro del login */
+.contenedor-login h2 {
+    margin-bottom: 24px;
+    /* Separación entre el título y el primer campo de texto */
+    color: #333;
+    /* Gris muy oscuro, casi negro, para que no canse la vista */
+}
+
+/* =========================================
+   CAMPOS DE TEXTO Y MENÚS DESPLEGABLES
+   ========================================= */
+.contenedor-formulario input,
+.contenedor-formulario select {
+    width: 100%;
+    /* Llenan todo el ancho de la tarjeta blanca */
+    padding: 12px;
+    /* Espacio interno para que el texto no quede pegado al borde */
+    margin-bottom: 16px;
+    /* Separación con el elemento de abajo */
+    border: 1px solid #ccc;
+    /* Borde gris claro sutil */
+    border-radius: 8px;
+    /* Esquinas redondeadas haciendo juego con la tarjeta */
+}
+
+/* Etiquetas de texto (Nombres:, Contraseña:, etc.) */
+.contenedor-formulario label {
+    display: block;
+    /* Fuerza a que cada label ocupe su propia línea entera */
+    text-align: left;
+    /* Alinea los textos a la izquierda */
+    margin-bottom: 6px;
+    /* Pequeña separación con su caja de texto correspondiente */
+    font-weight: bold;
+    /* Letra negrita para resaltar */
+}
+
+/* =========================================
+   BOTONES DEL FORMULARIO
+   ========================================= */
+/* Botón verde principal de "Iniciar Sesión" */
+.contenedor-formulario-ingresar {
+    width: 100%;
+    padding: 12px;
+    background-color: #1ec45e;
+    /* Verde brillante */
+    color: #fff;
+    /* Letra blanca */
+    border: none;
+    /* Sin borde */
+    transition: background-color 0.3s;
+    /* Animación suave al pasar el mouse (dura 0.3 segundos) */
+    border-radius: 8px;
+    /* Esquinas redondeadas */
+}
+
+/* Botón azul oscuro para "Volver" o "Salir" */
+.contenedor-formulario-salir {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    /* Separación con el botón de arriba */
+    background-color: #1A3A52;
+    /* Azul marino/oscuro */
+    color: #fff;
+    border: none;
+    transition: background-color 0.3s;
+    border-radius: 8px;
+    cursor: pointer;
+    /* Cambia el cursor a una 'manita' para indicar que es clickeable */
+}
+
+/* Botón de "Registrar Administrador/Barbero" */
+.boton-registrar {
+    font-size: 12px;
+    /* Letra un poco más pequeña */
+    color: #ffffff;
+    margin-left: auto;
+    margin-right: auto;
+    border: 4px solid #1A3A52;
+    /* Borde grueso azul oscuro */
+    background: #1A3A52;
+    /* Fondo igual al borde */
+    transition: background-color 0.3s;
+    margin-top: 10px;
+    width: 80%;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    /* Quita el subrayado si se usa en enlaces <a> */
+    display: inline-block;
+    /* Permite aplicar márgenes y paddings a un enlace */
+}
+
+.boton-rol {
+    font-size: 12px;
+    /* Letra un poco más pequeña */
+    color: #ffffff;
+    margin-left: auto;
+    margin-right: auto;
+    border: 4px solid #1A3A52;
+    /* Borde grueso azul oscuro */
+    background: #1A3A52;
+    /* Fondo igual al borde */
+    transition: background-color 0.3s;
+    margin-top: 10px;
+    padding: 12px 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    /* Quita el subrayado si se usa en enlaces <a> */
+    display: inline-block;
+    /* Permite aplicar márgenes y paddings a un enlace */
+
+
+}
+
+/* =========================================
+   EFECTOS HOVER (Al pasar el ratón por encima)
+   ========================================= */
+.boton-registrar:hover,
+.contenedor-formulario-salir:hover {
+    background-color: rgba(0, 255, 64, 0.751);
+    /* Se vuelve un verde semitransparente */
+    border: 4px solid #1A3A52;
+}
+
+.contenedor-formulario-salir:hover {
+    background-color: rgba(255, 0, 0, 0.751);
+    /* Se vuelve un rojo semitransparente (Alerta de salida) */
+}
+
+/* (Esta clase pertenece al otro archivo, pero la comentamos aquí igual) */
+.titulo-barra-sup {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 20px;
+}
