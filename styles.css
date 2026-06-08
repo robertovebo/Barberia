@@ -1,0 +1,378 @@
+/* =========================================
+   RESETEO GLOBAL
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================================
+   ESTRUCTURA GENERAL DEL SISTEMA (SPA)
+   ========================================= */
+body {
+    background-color: #fbfbfc;
+    /* Fondo gris súper claro para la zona de trabajo */
+    overflow: hidden;
+    /* ¡CLAVE! Corta el scroll general de toda la página para comportarse como una App de escritorio */
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    /* Fija la altura al tamaño exacto del monitor */
+    display: flex;
+    flex-direction: column;
+    /* Apila el contenido en columna: Arriba (Barra Roja) y Abajo (Paneles) */
+}
+
+/* =========================================
+   ENCABEZADO (Barra Superior Roja)
+   ========================================= */
+.barra-sup {
+    background-color: #C41E3A;
+    /* Rojo Barbería */
+    width: 100%;
+    /* De lado a lado */
+    height: 15vh;
+    /* Ocupa el 15% de la altura total de la pantalla */
+    display: flex;
+    align-items: center;
+    /* Centra el título y botón verticalmente */
+    padding-left: 20px;
+    /* Despega el texto del borde izquierdo */
+}
+
+/* =========================================
+   CONTENEDORES PRINCIPALES DE TRABAJO
+   ========================================= */
+.contenedor-principal {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    width: 100%;
+    flex-grow: 1;
+    height: 85vh;
+    /* Obliga al contenedor a medir exactamente lo que sobra */
+    overflow: hidden;
+    /* Corta cualquier intento de estirarse más allá de la pantalla */
+}
+
+/* =========================================
+   MENÚ LATERAL IZQUIERDO (Barra Azul)
+   ========================================= */
+.barra-izq {
+    background-color: #1A3A52;
+    /* Azul oscuro corporativo */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* Apila los botones de arriba hacia abajo */
+    align-items: center;
+    /* Centra los botones horizontalmente */
+    padding-top: 15px;
+    padding-bottom: 15px;
+    gap: 10px;
+    /* Crea un espacio uniforme de 10px entre cada botón */
+    overflow-y: auto;
+    /* Solo esta barra azul tendrá scroll si hay muchos botones */
+}
+
+/* Botones individuales del menú lateral */
+.boton-barra-izq {
+    background: none;
+    /* Transparentes por defecto para que se vea el azul de fondo */
+    border: none;
+    padding: 10px 5px;
+    width: 90%;
+    /* Ocupan casi todo el ancho de los 100px */
+    border-radius: 8px;
+    /* Esquinas redondeadas */
+    display: flex;
+    flex-direction: column;
+    /* Apila el icono arriba y el texto abajo */
+    align-items: center;
+    gap: 6px;
+    /* Separación entre el icono y la palabra */
+    transition: background-color 0.3s;
+    /* Suaviza el cambio de color al pasar el mouse */
+    cursor: pointer;
+}
+
+/* Efecto al pasar el mouse por los botones laterales */
+.boton-barra-izq:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    /* Crea un "resaltado" blanco semitransparente sobre el botón */
+}
+
+/* Textos dentro del botón lateral */
+.texto-barra-izq {
+    color: #ffffff;
+    font-size: 11px;
+    /* Letra pequeña para que quepa bien */
+    font-weight: bold;
+    text-transform: uppercase;
+    /* Convierte todo el texto a MAYÚSCULAS automáticamente */
+}
+
+/* Iconos de FontAwesome dentro del botón */
+.icono-barra-izq {
+    font-size: 26px;
+    /* Tamaño grande para que sean el foco visual */
+    color: #ffffff;
+    display: inline-block;
+}
+
+/* =========================================
+   BOTONES DEL ENCABEZADO Y TEXTOS
+   ========================================= */
+/* Botón superior derecho (Iniciar o Cerrar Sesión) */
+.boton-iniciar-sesion {
+    font-size: 24px;
+    color: #ffffff;
+    /* Texto blanco para contrastar con el fondo rojo de la barra-sup */
+    margin-left: auto;
+    /* Lo empuja automáticamente hacia el extremo derecho */
+    margin-right: 20px;
+    /* Lo separa un poco del borde derecho de la pantalla */
+    border: #1A3A52 solid 4px;
+    /* Borde azul oscuro grueso */
+    background: none;
+    /* Fondo transparente */
+    transition: background-color 0.3s;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    /* Quita el subrayado del hipervínculo */
+    display: inline-block;
+}
+
+.boton-iniciar-sesion:hover {
+    background-color: rgba(0, 255, 64, 0.751);
+    /* Cambia a verde al pasar el cursor */
+}
+
+/* =========================================
+   ÁREA CENTRAL DE TRABAJO (Paneles Dinámicos)
+   ========================================= */
+.contenedor-secundario {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* Empieza a colocar el contenido desde arriba */
+    align-items: center;
+    /* Centra el contenido */
+
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    /* ¡EL TRUCO! Obliga a la caja a no estirarse más allá del monitor */
+    overflow-y: auto;
+    /* Enciende la barra de desplazamiento vertical independiente */
+    overflow-x: hidden;
+
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+/* Estilos para los títulos que se inyectan en cada panel */
+.titulo-principal,
+.titulo-secundario {
+    color: #0c0c0c;
+    /* Casi negro */
+    text-align: center;
+    margin-bottom: 10px;
+    margin-left: 0px;
+    padding-top: 0px;
+}
+
+/* Título de la barra superior (Ej. "Administrador") */
+.titulo-barra-sup {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+/* Iconos sueltos al lado de títulos */
+.iconos-titulo {
+    font-size: 26px;
+    color: #ffffff;
+    display: inline-flex;
+}
+
+/* El bloque contenedor que JavaScript enciende o apaga (Citas, Ventas, etc.) */
+.seccion-dinamica {
+    width: 100%;
+    padding: 20px;
+    /* Dale aire al contenido para que no toque los bordes */
+}
+
+.boton-ubicacion {
+    font-size: 18px;
+    /* Un poco más pequeño que el de sesión para jerarquía */
+    color: #ffffff;
+    margin-left: 53%;
+    /* Empuja este botón y al de sesión hacia la derecha */
+    margin-right: 15px;
+    /* Lo separa del botón de iniciar sesión */
+    background: transparent;
+    transition: background-color 0.3s, color 0.3s;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    /* Centra el icono con el texto */
+    gap: 8px;
+    /* Espacio entre el icono del mapa y la palabra */
+    border: #1A3A52 solid 4px;
+}
+
+/* =========================================
+   MODIFICADOR: BOTÓN UBICACIÓN A LA IZQUIERDA SOLO AFECTA A LA PAGINA PRINCIPAL
+   ========================================= */
+.boton-ubicacion-izq {
+    margin-left: 10px !important;
+    /* Lo separa un poco del título (h1) a su izquierda */
+    margin-right: 15px !important;
+    /* Empuja todo lo demás hacia la derecha */
+}
+
+.boton-ubicacion:hover {
+    background-color: #ffffff;
+    color: #C41E3A;
+}
+
+/* =========================================
+    MODULOS CRUD
+   ========================================= */
+
+/* =========================================
+   ESTILOS UNIVERSALES PARA MÓDULOS CRUD (Tablas y Buscadores)
+   ========================================= */
+
+/* Contenedor superior (Botón agregar + Buscador) */
+.crud-encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+/* Buscador */
+.crud-buscador {
+    display: flex;
+    gap: 10px;
+}
+
+.crud-input {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 300px;
+    outline: none;
+}
+
+.crud-input:focus {
+    border-color: #1A3A52;
+}
+
+/* Botones de acción generales */
+.btn {
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s, transform 0.1s;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+/* Colores específicos para botones */
+.btn-agregar {
+    background-color: #1A3A52;
+    color: #ffffff;
+}
+
+.btn-agregar:hover {
+    background-color: #2e6085;
+}
+
+.btn-buscar {
+    background-color: #C41E3A;
+    color: #ffffff;
+}
+
+.btn-buscar:hover {
+    background-color: #a0182f;
+}
+
+.btn-limpiar {
+    background-color: #e2e8f0;
+    color: #333333;
+}
+
+.btn-limpiar:hover {
+    background-color: #cbd5e1;
+}
+
+/* Tabla universal */
+.tabla-crud {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.tabla-crud th {
+    background-color: #1A3A52;
+    color: #ffffff;
+    text-align: left;
+    padding: 12px;
+}
+
+.tabla-crud td {
+    padding: 12px;
+    border-bottom: 1px solid #dddddd;
+    color: #333333;
+}
+
+.tabla-crud tr:hover {
+    background-color: #f8fafc;
+    /* Ilumina la fila al pasar el mouse */
+}
+
+/* Acciones dentro de la tabla */
+.accion-editar {
+    color: #1A3A52;
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.accion-editar:hover {
+    color: #2e6085;
+    text-decoration: underline;
+}
+
+.accion-eliminar {
+    color: #C41E3A;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.accion-eliminar:hover {
+    color: #a0182f;
+    text-decoration: underline;
+}
