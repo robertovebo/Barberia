@@ -164,9 +164,15 @@ $mensaje_alerta = isset($_GET['mensaje']) ? $_GET['mensaje'] : '';
                         echo "<td style='text-align: center;'>";
                         
                         if ($cita['estado'] === 'Pendiente') {
-                            echo "<a href='estadoCita.php?id=" . $cita['id_cita'] . "&accion=completar' class='accion-editar' style='color: #166534;' onclick=\"return confirm('¿Marcar cita como Completada?');\">
+                            // NUEVO BOTÓN DE EDITAR
+                            echo "<a href='editarCita.php?id=" . $cita['id_cita'] . "' class='accion-editar' style='color: #2563eb;'>
+                                    <i class='fa-solid fa-pen-to-square'></i> Editar
+                                  </a>
+                                  
+                                  <a href='estadoCita.php?id=" . $cita['id_cita'] . "&accion=completar' class='accion-editar' style='color: #166534;' onclick=\"return confirm('¿Marcar cita como Completada?');\">
                                     <i class='fa-solid fa-check-circle'></i> Completar
                                   </a>
+                                  
                                   <a href='estadoCita.php?id=" . $cita['id_cita'] . "&accion=cancelar' class='accion-eliminar' style='background: transparent; color: #dc2626;' onclick=\"return confirm('¿Cancelar esta cita? El espacio volverá a estar disponible.');\">
                                     <i class='fa-solid fa-ban'></i> Cancelar
                                   </a>";
