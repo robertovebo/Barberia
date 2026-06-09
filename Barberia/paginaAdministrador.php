@@ -73,10 +73,7 @@ $mensaje_alerta = isset($_GET['mensaje']) ? $_GET['mensaje'] : '';
                 <span class="texto-barra-izq">Inventario</span>
             </button>
 
-            <button class="boton-barra-izq" onclick="mostrarSeccion('dashboard')">
-                <i class="fa-solid fa-chart-pie icono-barra-izq"></i>
-                <span class="texto-barra-izq">Dashboard</span>
-            </button>
+            
         </div>
 
         <div class="contenedor-secundario">
@@ -164,9 +161,15 @@ $mensaje_alerta = isset($_GET['mensaje']) ? $_GET['mensaje'] : '';
                         echo "<td style='text-align: center;'>";
                         
                         if ($cita['estado'] === 'Pendiente') {
-                            echo "<a href='estadoCita.php?id=" . $cita['id_cita'] . "&accion=completar' class='accion-editar' style='color: #166534;' onclick=\"return confirm('¿Marcar cita como Completada?');\">
+                            // NUEVO BOTÓN DE EDITAR
+                            echo "<a href='editarCita.php?id=" . $cita['id_cita'] . "' class='accion-editar' style='color: #2563eb;'>
+                                    <i class='fa-solid fa-pen-to-square'></i> Editar
+                                  </a>
+                                  
+                                  <a href='estadoCita.php?id=" . $cita['id_cita'] . "&accion=completar' class='accion-editar' style='color: #166534;' onclick=\"return confirm('¿Marcar cita como Completada?');\">
                                     <i class='fa-solid fa-check-circle'></i> Completar
                                   </a>
+                                  
                                   <a href='estadoCita.php?id=" . $cita['id_cita'] . "&accion=cancelar' class='accion-eliminar' style='background: transparent; color: #dc2626;' onclick=\"return confirm('¿Cancelar esta cita? El espacio volverá a estar disponible.');\">
                                     <i class='fa-solid fa-ban'></i> Cancelar
                                   </a>";
@@ -498,7 +501,8 @@ $mensaje_alerta = isset($_GET['mensaje']) ? $_GET['mensaje'] : '';
                     $filtro_inv = " WHERE nombre LIKE '%$busqueda%' OR marca LIKE '%$busqueda%'";
                 }
 
-                $sql_inv = "SELECT id_producto AS id, nombre, marca, precio_venta, stock FROM productos $filtro_inv ORDER BY nombre ASC";
+                // NOTA: Se agregó 'estatus' a la consulta SQL
+                $sql_inv = "SELECT id_producto AS id, nombre, marca, precio_venta, stock, estatus FROM productos $filtro_inv ORDER BY nombre ASC";
                 $resultado_inv = $conexion->query($sql_inv);
 
                 if ($resultado_inv && $resultado_inv->num_rows > 0) {
@@ -509,7 +513,7 @@ $mensaje_alerta = isset($_GET['mensaje']) ? $_GET['mensaje'] : '';
                             <th>Marca</th>
                             <th>Precio Venta</th>
                             <th>Stock</th>
-                            <th style='text-align: center;'>Acciones</th>
+                            <th>Estatus</th> <th style='text-align: center;'>Acciones</th>
                           </tr>";
 
                     while ($prod = $resultado_inv->fetch_assoc()) {
@@ -519,17 +523,37 @@ $mensaje_alerta = isset($_GET['mensaje']) ? $_GET['mensaje'] : '';
                         echo "<td>" . htmlspecialchars($prod['marca']) . "</td>";
                         echo "<td style='font-weight: bold; color: #166534;'>$" . number_format($prod['precio_venta'], 2) . "</td>";
                         
+                        // Lógica del Stock (Bajo o Normal)
                         if ($prod['stock'] <= 3) {
                             echo "<td><b style='color: #991b1b; background-color: #fee2e2; padding: 4px 8px; border-radius: 4px;'>" . $prod['stock'] . " ¡Bajo!</b></td>";
                         } else {
                             echo "<td><span style='color: #166534; font-weight: bold;'>" . $prod['stock'] . " pzas</span></td>";
                         }
+
+                        // NUEVO: Lógica visual del Estatus
+                        if ($prod['estatus'] === 'Activo') {
+                            echo "<td><span style='background-color: #dcfce3; color: #166534; padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 13px;'>Activo</span></td>";
+                        } else {
+                            echo "<td><span style='background-color: #fee2e2; color: #991b1b; padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 13px;'>Inactivo</span></td>";
+                        }
                         
+                        // NUEVO: Botones de Acción dinámicos (Editar, Alta/Baja, Borrar)
                         echo "<td style='text-align: center;'>
                                 <a href='editarProducto.php?id=" . $prod['id'] . "' class='accion-editar'>
                                     <i class='fa-solid fa-pen-to-square'></i> Editar
-                                </a>
-                                <a href='eliminarProducto.php?id=" . $prod['id'] . "' class='accion-eliminar' onclick=\"return confirm('¿Seguro que deseas eliminar este producto?');\">
+                                </a>";
+                                
+                        if ($prod['estatus'] === 'Activo') {
+                            echo " <a href='eliminarProducto.php?id=" . $prod['id'] . "&accion=baja' class='accion-editar' style='color: #d97706;' onclick=\"return confirm('¿Inactivar producto? Ya no aparecerá para la venta.');\">
+                                    <i class='fa-solid fa-eye-slash'></i> Baja
+                                   </a>";
+                        } else {
+                            echo " <a href='eliminarProducto.php?id=" . $prod['id'] . "&accion=alta' class='accion-editar' style='color: #166534;' onclick=\"return confirm('¿Reactivar producto? Volverá a estar disponible.');\">
+                                    <i class='fa-solid fa-eye'></i> Activar
+                                   </a>";
+                        }
+
+                        echo "  <a href='eliminarProducto.php?id=" . $prod['id'] . "&accion=borrar' class='accion-eliminar' onclick=\"return confirm('¡Peligro! ¿Borrar este producto de forma permanente?');\">
                                     <i class='fa-solid fa-trash'></i> Borrar
                                 </a>
                               </td>";
@@ -542,61 +566,6 @@ $mensaje_alerta = isset($_GET['mensaje']) ? $_GET['mensaje'] : '';
                 ?>
             </div>
 
-            <div id="dashboard" class="seccion-dinamica" style="display: none;">
-                <div id="contenedorOpcionesDashboard" style="display: flex; align-items: center; justify-content: center;">
-                    <h1 class="titulo-principal" style="padding-right: 20px;">Dashboard de ventas</h1>
-                    <select name="opcionesVentas" id="opcionesVentas">
-                    <option value="Diarias">Diarias</option>
-                    <option value="Semanales">Semanales</option>
-                    <option value="Mensuales">Mensuales</option>
-                    </select>
-                </div>
-
-                <div id="estiloDashboard" style="display: flex; flex-direction: column; align-items: center; gap: 40px;">
-                    <div id="divBarra" style="display: flex; justify-content: center; flex-direction: row-reverse;">
-                        <table class="tablaGraficas">
-                            <tr>
-                                <th class="headerPrincipal" colspan="2">Ventas diarias</th>
-                            </tr>
-                            <tr>
-                                <th class="headersSecundarios">Cortes</th>
-                                <th class="headersSecundarios">Productos</th>
-                            </tr>
-                            <tr>
-                                <td id="ventasCortes" class="celdas">0</td>
-                                <td id="ventasProductos" class="celdas">0</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div id="divPastel" style="display: flex; justify-content: center; flex-direction: row-reverse;">
-                        <table id="tablaCortes" class="tablaGraficas">
-                            <tr>
-                                <th class="headerPrincipal" colspan="3">Ventas diarias de cortes</th>
-                            </tr>
-                            <tr>
-                                <th class="headersSecundarios">Cortes</th>
-                                <th class="headersSecundarios">Cantidad</th>
-                                <th class="headersSecundarios">Porcentaje</th>
-                            </tr>
-                            <tr>
-                                <th id="headerCabello">Cabello</td>
-                                <td id="cantidadCabello" class="celdas">0</td>
-                                <td id="porcentajeCabello" class="celdas">0</td>
-                            </tr>
-                            <tr>
-                                <th id="headerBarba">Barba</td>
-                                <td id="cantidadBarba" class="celdas">0</td>
-                                <td id="porcentajeBarba" class="celdas">0</td>
-                            </tr>
-                            <tr>
-                                <th id="headerBigote">Bigote</td>
-                                <td id="cantidadBigote" class="celdas">0</td>
-                                <td id="porcentajeBigote" class="celdas">0</td>
-                            </tr>
-                        </table>                        
-                    </div>
-                </div>
-            </div>
 
         </div>
 
@@ -656,90 +625,6 @@ $mensaje_alerta = isset($_GET['mensaje']) ? $_GET['mensaje'] : '';
         };
     </script>
 
-    <script src="d3.v7.js"></script>
-
-    <script>
-        //Gráfica de barras
-        // Declare the chart dimensions and margins.
-        var widthBar = 480;
-        var heightBar = 300;
-        var marginTop = 15;
-        var marginRight = 15;
-        var marginBottom = 22;
-        var marginLeft = 30;
-
-        // Declare the x (horizontal position) scale.
-        var x = d3.scaleBand()
-            .domain(["Productos", "Cortes"])
-            .range([marginLeft, widthBar - marginRight]);
-
-        // Declare the y (vertical position) scale.
-        var y = d3.scaleLinear()
-            .domain([0, 200])
-            .range([heightBar - marginBottom, marginTop]);
-
-        // Create the SVG container.
-        var barChart = d3.create("svg")
-            .attr("width", widthBar)
-            .attr("height", heightBar);
-
-        // Add the x-axis.
-        barChart.append("g")
-            .attr("transform", `translate(0,${heightBar - marginBottom})`)
-            .call(d3.axisBottom(x));
-
-        // Add the y-axis.
-        barChart.append("g")
-            .attr("transform", `translate(${marginLeft},0)`)
-            .call(d3.axisLeft(y));
-
-        divBarra.append(barChart.node());
-        
-        //Gráfica de pastel
-        // set the dimensions and margins of the graph
-        var width = 338
-            height = 338
-            margin = 30
-
-        // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
-        var radius = Math.min(width, height) / 2 - margin
-
-        // append the svg object to the div called 'my_dataviz'
-        var svg = d3.select("#divPastel")
-        .append("svg")
-            .attr("width", width)
-            .attr("height", height)
-        .append("g")
-            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-        // Create dummy data
-        var data = {a: 9, b: 20, c:30}
-
-        // set the color scale
-        var color = d3.scaleOrdinal()
-        .domain(Object.keys(data))
-        .range(["#4285f4", "#ea4335", "#fbbc04"])
-
-        // Compute the position of each group on the pie:
-        var pie = d3.pie()
-        .value(function(d) {return d[1]; })
-        var data_ready = pie(Object.entries(data))
-
-        // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
-        svg
-        .selectAll('whatever')
-        .data(data_ready)
-        .enter()
-        .append('path')
-        .attr('d', d3.arc()
-            .innerRadius(0)
-            .outerRadius(radius)
-        )
-        .attr('fill', function(d){ return(color(d.data[0])) })
-        .attr("stroke", "black")
-        .style("stroke-width", "2px")
-        .style("opacity", 0.7)  
-    </script>
 </body>
 
 </html>

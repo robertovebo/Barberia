@@ -1,12 +1,12 @@
 <?php
-// 1. CANDADO DE SEGURIDAD
 session_start();
-if (!isset($_SESSION['rol_usuario']) || $_SESSION['rol_usuario'] !== 'administrador') {
+// Permite el paso si el usuario es administrador O recepcionista
+if (!isset($_SESSION['rol_usuario']) || ($_SESSION['rol_usuario'] !== 'administrador' && $_SESSION['rol_usuario'] !== 'recepcionista')) {
     header("Location: login.php");
     exit;
 }
-
 require_once 'conexion.php';
+// ... el resto de tu código sigue igual
 
 // 2. PROCESAR EL GUARDADO (Cuando se envía el formulario)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

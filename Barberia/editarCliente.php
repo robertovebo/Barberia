@@ -1,11 +1,12 @@
 <?php
 session_start();
-if (!isset($_SESSION['rol_usuario']) || $_SESSION['rol_usuario'] !== 'administrador') {
+// Permite el paso si el usuario es administrador O recepcionista
+if (!isset($_SESSION['rol_usuario']) || ($_SESSION['rol_usuario'] !== 'administrador' && $_SESSION['rol_usuario'] !== 'recepcionista')) {
     header("Location: login.php");
     exit;
 }
-
 require_once 'conexion.php';
+// ... el resto de tu código sigue igual
 
 $id = isset($_GET['id']) ? intval($_GET['id']) : (isset($_POST['id']) ? intval($_POST['id']) : 0);
 

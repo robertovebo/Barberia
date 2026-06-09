@@ -1,10 +1,12 @@
 <?php
 session_start();
-if (!isset($_SESSION['rol_usuario']) || $_SESSION['rol_usuario'] !== 'administrador') {
+// Permite el paso si el usuario es administrador O recepcionista
+if (!isset($_SESSION['rol_usuario']) || ($_SESSION['rol_usuario'] !== 'administrador' && $_SESSION['rol_usuario'] !== 'recepcionista')) {
     header("Location: login.php");
     exit;
 }
 require_once 'conexion.php';
+// ... el resto de tu código sigue igual
 
 // Obtener clientes activos para el buscador
 $clientes = $conexion->query("SELECT id_cliente, nombre, apellidos, telefono FROM cliente WHERE estatus = 'Activo'");

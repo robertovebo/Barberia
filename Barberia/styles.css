@@ -171,6 +171,7 @@ body {
 
     padding-top: 20px;
     padding-bottom: 40px;
+
 }
 
 /* Estilos para los títulos que se inyectan en cada panel */
@@ -375,65 +376,4 @@ body {
 .accion-eliminar:hover {
     color: #a0182f;
     text-decoration: underline;
-}
-
-/*Estilo de las tablas */
-.tablaGraficas, .celdas {
-    border:1px solid black;
-    font-weight: lighter;
-}
-
-.tablaGraficas {
-    margin-left: 40vh;
-    height: 20vh;
-}
-
-.headerPrincipal, .headersSecundarios, #headerCabello, #headerBarba, #headerBigote {
-    text-align: center;
-    border:1px solid black;
-    font-weight: lighter;
-}
-
-.headerPrincipal {
-    font-size: 36px;
-    padding-left: 2vh;
-    padding-right: 2vh;
-    background-color: gray;
-    color: white;
-}
-
-.headersSecundarios {
-    font-size: 24px;
-    background-color: gray;
-    color: white;
-}
-
-#headerCabello {
-    font-size: 24px;
-    background-color: #4285f4;
-    color: white;
-}
-
-#headerBarba {
-    font-size: 24px;
-    background-color: #ea4335;
-    color: white;
-}
-
-#headerBigote {
-    font-size: 24px;
-    background-color: #fbbc04;
-    color: white;
-}
-
-.celdas {
-    font-size: 18px;
-}
-
-#divBarra {
-    margin-top: 5vh;
-}
-
-#tablaCortes {
-    margin-top: 10vh;
 }

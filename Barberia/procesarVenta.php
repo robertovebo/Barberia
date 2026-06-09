@@ -1,12 +1,12 @@
 <?php
 session_start();
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-
-if (!isset($_SESSION['rol_usuario']) || $_SESSION['rol_usuario'] !== 'administrador') {
+// Permite el paso si el usuario es administrador O recepcionista
+if (!isset($_SESSION['rol_usuario']) || ($_SESSION['rol_usuario'] !== 'administrador' && $_SESSION['rol_usuario'] !== 'recepcionista')) {
     header("Location: login.php");
     exit;
 }
 require_once 'conexion.php';
+// ... el resto de tu código sigue igual
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_cliente = intval($_POST['id_cliente']);
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt_p->execute();
                 $precio_unitario = $stmt_p->get_result()->fetch_assoc()['precio_venta'] ?? 0.00;
 
-                $sql_det = "INSERT INTO detalle_venta (id_venta, id_producto, id_servicio, cantidad, precio_unitario) VALUES (?, ?, ?, ?, ?)";
+                $sql_det = "INSERT INTO detalle_venta (id_venta, id_producto, id_servicio, cantidad, precio_unitario) VALUES (?, ?, NULL, ?, ?)";
                 $stmt_det = $conexion->prepare($sql_det);
                 $stmt_det->bind_param("iiid", $id_venta, $item_id, $cantidad, $precio_unitario);
             } else {
