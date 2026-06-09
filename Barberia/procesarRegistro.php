@@ -1,12 +1,12 @@
 <?php
-// 1. CONEXIÓN A LA BASE DE DATOS
-$conexion = new mysqli("localhost", "root", "", "barberia_db");
+// 1. INCLUIMOS EL ARCHIVO DE CONEXIÓN
+require_once 'conexion.php';
 
 if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
 }
 
-// 2. RECIBIR DATOS
+// 2. RECIBIR DATOS DEL FORMULARIO
 $rol = $_POST['rol'];
 $nombre = $_POST['nombre'];
 $apellidos = $_POST['apellidos'];
