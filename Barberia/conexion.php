@@ -1,9 +1,9 @@
 <?php
 // Parámetros de conexión
-$servidor = "localhost";
-$usuario = "root";
-$password = "";
-$base_datos = "barberia_db";
+$servidor = "sql3.freesqldatabase.com";
+$usuario = "sql3829815";
+$password = "SzxM1INd2c";
+$base_datos = "sql3829815";
 
 // Crear la conexión
 $conexion = new mysqli($servidor, $usuario, $password, $base_datos);
